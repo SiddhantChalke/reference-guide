@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bom</title>
+</head>
+<body>
+    <!-- BOM - for app to communicate with browser -->
+    <p id="p1"></p>
+    <hr>
+    <button onclick="location.assign('www.google.com')">Google</button>
+    <button onclick="history.back()">Forward</button>
+    <button onclick="history.forward()">Backward</button>
+    <script>
+        document.getElementById('p1').innerHTML = 
+        `
+        window width = ${window.innerWidth} <br>
+        window heigth = ${window.innerHeight} <br>
+        screen WnH = Width: ${screen.width} , Height: ${screen.height}<br>
+        screen availWnH = ${screen.availWidth} , ${screen.availHeight} <br>
+        url = ${location.href}<br>
+        hostname = <br>
+
+        cookie enabled? = ${navigator.cookieEnabled} <br>
+        app version = ${navigator.appVersion} <br>
+        Browser lang = ${navigator.language} <br>
+
+        `
+
+    
+    </script>
+</body>
+</html>

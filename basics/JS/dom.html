@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>DOM </h1>
+    <hr>
+    <p class="para">This isn't created using JavaScript</p>
+    <p><a href="#" id="link">Link</a> whose attribute was changed w JavaScript</p>
+    <ol id="list1">
+        <li>Element</li>
+        <li>whose</li>
+        <li>attributes</li>
+    </ol>
+    <ol id="list2">
+        <li>were</li>
+        <li>changed</li>
+        <li>with JavaScript</li>
+        <li>methods</li>
+    </ol>
+    <hr>
+    <button onclick='fetchImg()'>Fetch Image</button>
+    <img src="" alt="" id="image" style="width: 100px;z-index: 2;position: relative;">
+    <script>
+        // Creating an HTML element in JS
+        var para = document.createElement("p");
+        para.innerHTML = "This element is created using JavaScript";
+        document.body.appendChild(para);
+        
+        // selecting by tags, class, ids
+        console.log(document.getElementsByTagName('p'));
+        console.log(document.getElementsByClassName('para'));
+
+        // changing attributes w properties
+        document.getElementById('link').href='https://www.google.com/';
+        // -||- using functions
+        function fetchImg(){
+            document.getElementById('image').src='https://static.vecteezy.com/system/resources/previews/004/531/762/original/happy-radish-cute-mascot-character-vector.jpg';
+        }
+        // changing attr w method- setAttribute
+        document.getElementById('list1').setAttribute('type','A');
+        document.getElementById('list2').setAttribute('start','2');
+        
+        document.write('siddhant')
+    </script>
+</body>
+</html>

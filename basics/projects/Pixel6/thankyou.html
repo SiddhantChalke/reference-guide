@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel6 Thank You!!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:wght@200;300;500&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="thankyou.css">
+</head>
+<body>
+    <form class="thank-you" onmouseenter="genOtp()" id="form-id">
+        <p class="description">
+            Dear <b>John</b>,<br>
+                Thank you for your inquiry. A 4 digit verificatin number is sent to your email <b>youremail@yahoo.co.in</b>.
+                <br>Please enter it in the following box and submit for confirmation. 
+        </p>
+        <div class="otp-verification">
+            <label for="otp">Please Enter your OTP:</label>
+            <input type="number" onmouseleave='checkOtp()' name="otp" id="otpInp">
+            <button onclick="redirect()">Validate</button>
+            
+        </div>
+    </form>
+    <script src="thankyou.js"></script>
+</body>
+</html>

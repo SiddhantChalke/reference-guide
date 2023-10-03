@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="p1">Siddhant</p>
+    <script>
+        var str = 'Siddhant';
+
+        document.getElementById("p1").innerHTML += `Length is ${str.length} <br>`;
+
+        var str1 = `sid xd zsg fdbbdrh  sid sd df bgd zdf sid`
+        var str2 = str1.replace('sid','SID')
+        var str3 = str1.replace(/sid/g,'SID')
+        document.getElementById("p1").innerHTML +=`
+        ${str2} <br>
+        ${str3}
+        `
+
+    </script>
+</body>
+</html>

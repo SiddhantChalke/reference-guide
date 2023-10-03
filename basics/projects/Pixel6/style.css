@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+}
+.application{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 42rem;
+    height: 35rem;
+    border: 2px solid black;
+    text-align: center;
+}
+#h1{
+    font-size: 1.7rem;
+    text-align: center;
+    margin: 0.5rem auto 0.5rem;
+    font-weight: 600;
+}
+hr{
+    margin-bottom: 10px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.full-name,.e-mail,.pan-number,.loan-amount{
+    height: 5rem;
+    text-align: left;
+    
+}
+.captcha-val{
+    margin: 0.5rem 0;
+    height: 5rem;
+    text-align: left;
+}
+#capt{
+    font-size: 2rem;
+}
+label{
+    margin: 1rem 1.5rem 0;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #000000bd;
+    font-weight: 600;
+}
+input{
+    height: 2rem;
+    width: 19rem;
+    margin: 0rem 1rem 0 auto;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-align: center;
+}
+/* to remove the arrow keys in number input */
+input#loan-amt::-webkit-outer-spin-button,
+input#loan-amt::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+input#inp-capt::-webkit-outer-spin-button,
+input#inp-capt::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#eId{
+    width: 20rem;
+}
+#inp-capt{
+    margin: 0 1rem 0 4rem;
+    width: 10rem;
+}
+.inval{
+    display: none;
+    margin: 4px 22px;
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: red;
+}
+.words{
+    margin: 4px 22px;
+    font-size: 18px;
+    font-weight: 600;
+    color: green;
+}
+.buttons{
+    height: 3rem;
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: flex-end;
+}
+.buttons button{
+    margin: 0 1.3rem;
+    position: absolute;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid #72bcd4;
+    border-radius: 4px;
+    background-color: #9ce6ff;
+
+}

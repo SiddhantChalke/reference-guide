@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // basic class creation
+        class Person {
+            firstName;
+            lastName;
+            age;
+            email;
+            getFullName() {
+                return `${this.firstName} ${this.lastName}`
+            }
+            // getters
+            get email() {
+                return email;
+            }
+            // setters
+            set email(newmail){
+                if(newmail.includes('@')) this.email=newmail
+                else return 'Invalid email'
+            }
+            // static method = callable only on class not its instances
+            static count(){
+                if(!this.count) this.count=1;
+                else this.count++;
+                return this.count;
+            }
+
+        }
+        // inheritance
+        class Student extends Person {
+            grade;
+            major;
+            introduce() {
+                return ` I'm ${this.firstName} from ${this.major} with ${this.grade} grade`
+            }
+        }
+
+        // Polymorphism
+        class Shape{
+            area(){}
+            perimeter(){}
+        }
+        class Circle extends Shape{
+            radius;
+            area(){
+                return Math.PI*radius*radius;
+            }
+            perimeter(){
+                return 2*Math.PI*radius;
+            }
+        }
+        class Rectangle extends Shape{
+            length; breadth;
+            area(){
+                return length*breadth;
+            }
+            perimeter(){
+                return 2*(length+breadth);
+            }
+        }
+        class Square extends Shape{
+            side;
+            area(){
+                return side*side;
+            }
+            perimeter(){
+                return 4*side;
+            }
+        }
+        // Encapsulation
+        class BankAccount{
+            accountNumber; balance;
+            deposit(amount){
+                return this.balance += this.amount;
+            }
+            withdraw(amount){
+                return this.balance -= this.amount;
+            }
+        }
+        // Aggregation
+        class Book{
+            title;
+        }
+        class Library{
+            books=[];
+            addBook(book){
+                this.books.push(book);
+            }
+            findBook(keyword){
+               return this.books.find(book=>book.title.toLowerCase() === keyword.toLowerCase());
+            }
+        }
+        const L1= new Library();
+        const B1 = new Book(); B1.title = 'Oedipus Rex';
+        const B2 = new Book(); B2.title = 'Tokyo Zodiac Murders';
+        const B3 = new Book(); B3.title = 'Death on the Nile';
+        const B4 = new Book(); B4.title = 'Sputnik Sweetheart';
+        const B5 = new Book(); B5.title = 'Norwegian Wood';
+        L1.addBook(B1); 
+        L1.addBook(B2);
+        L1.addBook(B3);
+        L1.addBook(B4);
+        L1.addBook(B5);
+        console.log(L1.books);
+        console.log( L1.findBook('Oedipus Rex').title );
+    </script>
+</body>
+
+</html>

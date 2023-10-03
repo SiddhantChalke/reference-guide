@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel6 Loan Application</title>
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:wght@200;300;500&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<body>
+    <div class="application">
+        <p id="h1">Personal Details</p>
+        <hr>
+        <form action="thankyou.html" name="application-form" autocomplete="off">
+            <div class="full-name">
+                <label for="fullName">Enter Your Full Name: </label>
+                <input type="text" id="fullName" onchange="nameCheck()" placeholder="John Liebert" >
+                <p class="inval" id="invalName">Full Name should be 2 words with 4 characters each using only alphabets</p>
+            </div>
+            <div class="e-mail">
+                <label for="eId">Enter Your Email Address: </label>
+                <input type="email" id="eId" onchange="emailCheck()" placeholder="yourmail@yahoo.com" >
+                <p class="inval" id='invalEmail'>Use valid Email format</p>
+            </div>
+            <div class="pan-number">
+                <label for="panId">Enter Your PAN Number: </label>
+                <input type="text" id="panId" onchange="panCheck()" placeholder="ABCDE1234X" >
+                <p class="inval" id="invalPan">Invalid PAN Card Number</p>
+            </div>
+            <div class="loan-amount">
+                <label for="loan-amt">Enter Loan Amount: </label>
+                <input type="number" id="loan-amt" placeholder="10000" onchange="amtCheck()">
+                <p class="words">svkjn jnccjawn</p>
+                <p class="inval" id="invalAmt">segc scht tvyrj vdrh erc </p>
+            </div>
+            <div class="captcha-val" onmouseover="createSum()">
+                <label for="inp-capt">Enter captcha:</label>
+                <span id="capt" ></span>
+                <button>New Captcha</button>
+                <input type="number" id="inp-capt" onchange="captCheck()">
+                <p class="inval" id="invalCapt">Invalid captcha. 3 attempts left !</p>
+            </div>
+            <div class="buttons">
+                <input type="submit" />
+            </div>
+            
+            
+        </form>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

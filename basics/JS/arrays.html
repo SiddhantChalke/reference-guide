@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+</head>
+<body>
+    <p id="p1"></p>
+
+    <script>
+        var arr1 = [5,7,4,7,2,10,3,5,66,100];
+        var arr2 = ['oya','sumi','pun','pun '];
+        function count(arr, num){
+            let sortedArr = arr.sort((a,b)=> (a-b));
+            console.log(sortedArr)
+            let cnt=0;
+            for(let i=0;i<sortedArr.length-1;i++){
+                if(sortedArr[i]==num){
+                    cnt++;
+                }
+            }
+            return cnt;
+        }
+        console.log(count(arr1,3));
+
+        // property
+        document.getElementById("p1").innerHTML = `[ ${arr1} ] <br>length = ${arr1.length} <br>`;
+
+        // methods
+        // adding and removing some elements
+        // document.getElementById("p1").innerHTML += `${arr2} <br>`;
+
+        arr.push(60); // adds element at the end of the array
+        document.getElementById("p1").innerHTML += `${arr} <br>`;
+
+
+        arr.unshift(5); // adds element at the start of the array
+        document.getElementById("p1").innerHTML += `${arr} <br>`;
+
+        arr.splice(3, 0, 25);
+        document.getElementById("p1").innerHTML += `${arr} <br>`;
+
+        // remove
+
+        arr.pop();
+        document.getElementById("p1").innerHTML += `${arr} <br>`;
+
+        arr.shift();
+        document.getElementById("p1").innerHTML += `${arr} <br>`;
+
+        arr.splice(2, 1,);
+        document.getElementById("p1").innerHTML += `${arr} <br> <br>`;
+
+        // index
+        document.getElementById("p1").innerHTML += `index of 20 = ${arr.indexOf(20)} <br>`;
+
+        document.getElementById("p1").innerHTML += ` lastindex of 20 = ${arr.lastIndexOf(20)} <br><br>`;
+
+
+        // sort
+
+        var names = ["Sidd", "Sajid", "Venky", "KD", "Saad"];
+        document.getElementById("p1").innerHTML += `${names} <br>`;
+
+        names.sort();
+        document.getElementById("p1").innerHTML += `${names} <br>`;
+
+        names.sort().reverse();
+        document.getElementById("p1").innerHTML += `${names} <br><br> <hr> <br>`;
+
+
+        // ** number sort
+
+        var nums = [40, 20, 200, 10, 110];
+
+        document.getElementById("p1").innerHTML += `${nums} <br>`;
+
+        var sortedArray = nums.sort((a, b) =>{
+            return (b-a);
+        });
+        document.getElementById("p1").innerHTML += `${sortedArray} <br> <br>`;
+
+
+
+        // concat
+        document.getElementById("p1").innerHTML += `${nums.concat(names)} <br> <hr>`;
+
+
+        // ES5 Array Methods
+
+        // map
+        var mappedArray = arr.map((ele) =>{
+            return ele * 2;
+        })
+
+        document.getElementById("p1").innerHTML += `${mappedArray} <br>`;
+
+        // filter
+        var filteredArray = arr.filter((ele) => {
+            return ele > 25;
+        })
+        document.getElementById("p1").innerHTML += `${filteredArray} <br> <br>`;
+
+        // reduce
+        var addition = arr.reduce((prev, curr) => {
+            return prev - curr;
+        })
+
+        document.getElementById("p1").innerHTML += `addition = ${addition} <br>`;
+
+        var addition1 = arr.reduceRight((prev, curr) => {
+            return prev - curr;
+        })
+
+        document.getElementById("p1").innerHTML += `addition = ${addition1} <br><br>`;
+
+        // some
+
+        var isSome = arr.some((ele) => {
+            return ele > 25;
+        })
+        document.getElementById("p1").innerHTML += `isSome = ${isSome} <br>`;
+
+        // every
+
+        var isEvery = arr.every((ele) => {
+            return ele > 25;
+        })
+        document.getElementById("p1").innerHTML += `isEvery = ${isEvery} <br><br>`;
+
+
+        console.log(arr);
+        console.log(arr.toString());
+
+
+        // ES6 Methods
+
+        // find
+
+        var element = arr.find((ele)=>{
+            return ele> 25;
+        })
+        document.getElementById("p1").innerHTML += `element = ${element} <br>`;
+
+
+        // findIndex
+        var element1 = arr.findIndex((ele)=>{
+            return ele> 25;
+        })
+        document.getElementById("p1").innerHTML += `element = ${element1} <br>`;
+
+
+
+        // ======================= SET => to store unique elements ==========================
+        // ES6
+
+        var set = new Set();
+        set.add(10);
+        set.add(20);
+        set.add(30);
+        set.add(10); //ignore
+        set.add(40);
+
+        console.log(set);
+
+        set.delete(20);
+        console.log(set);
+
+        // 1) array => unique array
+
+        var names1 = ["sajid", "sidd", "sajid", "sidd","sajid", "sidd"];
+        console.log(names1);
+
+        // convert array to set
+        var namesSet = new Set(names1);
+        console.log(namesSet);
+
+        // conver set to array
+
+        var nameSet1 = Array.from(namesSet);
+        console.log(nameSet1);
+
+
+        console.log(Array.from(new Set(nameSet1)));
+
+
+
+        // ===================== JSON  ES6=================
+
+        var user ={
+            id: 10,
+            name: "John Doe",
+        };
+
+        console.log(user);
+
+
+        // JSON.stringify
+        var str = JSON.stringify(user);
+        console.log(str);
+
+        var str2 = '{"id" : 50, "address": "Pune"}';
+        console.log(str2);
+
+        // JSON.parse
+        var obj = JSON.parse(str2);
+        console.log(obj);
+
+
+
+        // ================ MAP ==============
+
+        var map = new Map();
+
+        map.set("id", 10);
+        map.set("name", "Saijd");
+
+        console.log(map);
+
+        for(let key of map.keys()){
+            console.log(key);
+        }
+
+        for(let value of map.values()){
+            console.log(value);
+        }
+
+        for(let entry of map.entries()){
+            console.log(entry);
+        }
+        
+    </script>
+</body>
+</html>

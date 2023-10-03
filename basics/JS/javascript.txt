@@ -1,0 +1,45 @@
+DATA TYPES => 
+num : 1, 3.14
+string: "single-line"/'single-line'/`multi-line`
+bool, null: no value
+undefined: not known for now
+array[all data type]
+any: num/string/...
+
+VARIABLES =>
+var = vanilla js (camelCase)
+let, const = ES
+
+MEMORY
+Stack stores variables, functn calls Heap stores
+stack and heap is hash-mapped
+minimize variables(bcoz stack memory <<< heap memory)
+
+HOISTING
+variables declared w 'var' are pushed at the beginning, but not w 'let'
+
+DOM
+properties: innerHTML, innerText,
+methods: getElementById(),querrySelector(),querrySelectorAll()
+4 pillars: selecting elements, changing html, changing css, event listener
+
+**EVENTS
+html has event not js
+browser events = onload()
+user events = onclick, onmouseover(),etc
+event capturing 
+event bubbling
+
+STRINGS
+property= length, 
+methods = toUpperCase, toLowerCase, substring, slice, split, replace, indexOf, lastIndexOf, search, trim
+
+Callback fn(ES5) = Arrow fn(ES6) = Closure = Lambda fn(nodejs)
+
+Lifetime of variables => from it's declaration to browser closing
+
+this keyword => refers to parent obj/ element
+
+alert, prompt, confirm
+timing events = setTimeout(), setInterval(), clearInterval()
+

@@ -1,0 +1,217 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+}
+
+ul,li{
+    display: flex;
+    text-decoration: none;
+    margin: auto;
+}
+ul{
+    margin-right: 2rem;
+}
+.alpha-link {
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0.6rem 1.3rem;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #000;
+}
+.active,
+.alpha-link:hover {
+    background-color: #deb887;
+    color: #fff;
+}
+
+.active-link {
+    color: #fff;
+}
+
+.logo {
+    height: 50px;
+    width: 150px;
+}
+
+.dropdown {
+
+    position: relative;
+    border-radius: 3px;
+
+}
+
+.dropdown .link {
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0.6rem 1.3rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    width: calc(100% + 3rem);
+    background-color: #fff;
+}
+
+.beta-link {
+    display: none;
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: none;
+    color: #000;
+    padding: 0.6rem 1.5rem;
+
+}
+.dropdown:hover .beta-link {
+    display: block;
+}
+.dropdown .link:hover,
+.beta-link:hover {
+    background-color: #deb887;
+    color: #fff;
+    border-radius: 4px;
+}
+/* banner */
+.face{
+    background-image: linear-gradient(0deg, rgba(1, 1, 1, 0.3), rgba(1, 1, 1, 0.6)), url("images/Bg_2.jpg");
+    background-position-x: -5px;
+    background-size: contain;
+    padding: 16% 0 6% 0;
+    text-align: center;
+    color: #fff;
+    /* position: relative; */
+    /* top: 60px; */
+}
+.face-heading {
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: bolder;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.face-info {
+    margin-top: 1.6rem;
+    font-size: 1.1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-inline: auto;
+    inline-size: 550px;
+    line-height: 28px;
+}
+.reserve {
+    display: inline-block;
+    margin: auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 3px solid burlywood;
+    border-radius: 4px;
+    padding: 15px 0;
+    margin-top: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.reserve:hover {
+    background-color: #deb887;
+    color: black;
+    text-align: center;
+}
+
+.reserve a {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    padding: 15px 56px;
+}
+/* little story section */
+.mid {
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 5% 4%;
+}
+.story-img {
+    max-height: 325px;
+}
+
+.story-img {
+    box-shadow: -12px -12px #deb887;
+}
+.story {
+    width: 55%;
+    text-align: center;
+    font-size: 2rem;
+}
+.story-heading {
+    font-size: 32px;
+    padding: 1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.h1colored{
+    color: #deb887;
+}
+
+.story-subheading {
+    font-size: 1rem;
+    line-height: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.story-p {
+    font-size: 1rem;
+    line-height: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.story a {
+    color: black;
+}
+
+/* parallax quote */
+.parallax {
+    height: 19rem;
+    background-image: linear-gradient(0deg, rgba(1, 1, 1, 0.3), rgba(1, 1, 1, 0.6)), url("images/Bg_5.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    top: 0px;
+    z-index: -1;
+    text-align: center;
+}
+
+.quote {
+    color: #fff;
+    font-size: 40px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 6rem;
+}
+
+.quote-by {
+    color: #fff;
+    text-align: center;
+    padding-left: 20rem;
+    font-size: 1.2rem;
+    margin-bottom: 5rem;
+}
+
+/* footer */
+.footer{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #000;
+    color: #fff;
+    padding: 3rem;
+    text-align: center;
+}

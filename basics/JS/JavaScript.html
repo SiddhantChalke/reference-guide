@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+    <!-- <button onclick="checkDate()">checkDate()</button>
+    <p id='txt'>Date Now</p> -->
+
+    <!-- <p>hehehehe</p>
+    <p class="para">hohohoho</p>
+    <p class="para">huhuhuhuhu</p> -->
+
+    <!-- <a href="#" id="link">Link to Google Home</a> -->
+    
+    <ol id="list1">
+        <li>naruto</li>
+        <li>sasuke</li>
+        <li>sakura</li>
+    </ol>
+    <ol id="list2">
+        <li>kakashi</li>
+        <li>yamato</li>
+        <li>sai</li>
+    </ol>
+    <hr>
+    <button onclick="genOtp()">Genrerate OTP</button>
+    <p id="otp"></p>
+    <hr>
+    <input type="number" id="continue">
+    <button onclick="continueEg()">Continue Eg</button>
+    <p id="continueP"></p>
+    <script>
+        // function checkDate() {
+        //     document.getElementById("txt").innerHTML = new Date();
+        // }
+
+        // selecting by tags, class, ids
+        // console.log(document.getElementsByTagName('p'));
+        // console.log(document.getElementsByClassName('para'));
+
+        // changing attributes w properties
+        // document.getElementById('link').href='www.google.com';
+        
+        // changing attr w method- setAttribute
+        // document.getElementById('list1').setAttribute('type','A');
+        // document.getElementById('list2').setAttribute('start','2');
+
+        // vars
+        var i=10; var j='20';
+        console.log(i+j);
+        // objects
+        var user = {
+            age:22,
+            name:'Sid',
+            address:{
+                city:'Mumbai',
+                pincode:400001
+            }
+        }
+        // string interpolation`${}`
+        document.getElementById('obj').innerHTML=`
+            Hello! I am ${user.name}, a ${user.age} years old living in ${user.address[city]}
+        `
+        // document.createElement()
+
+        // generating random number 
+        function genOtp(){
+            var rNum = Math.floor(Math.random()*10000);
+            if (rNum.toString().length < 4) {
+                if (rNum.toString().length == 3) {
+                    rNum += "0";
+                }
+                if (rNum.toString().length == 2) {
+                    rNum += "00";
+                }
+            }
+            document.getElementById("otp").innerHTML = `${rNum} <br>`;
+        }
+
+        // break and continue example
+        
+    </script>
+</body>
+</html>

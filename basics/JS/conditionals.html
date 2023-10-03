@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>conditionals</title>
+</head>
+<body>
+    <h3>1. Program to find the area and circumference of a circle.</h3>
+    Enter the Radius:
+    <input type="number" id="radius">
+    <button onclick="calCircle()">Calculate</button>
+    <hr>
+
+    <h3>2. Program to find the area of a triangle given its base and height.</h3>
+    Enter the Base:
+    <input type="number" id="base">
+    <br>
+    Enter the Height:
+    <input type="number" id="height">
+    <br>
+    <button onclick="calTriangle()">Calculate Area</button>
+    <hr>
+
+    <h3>3. Program to convert a person's name into abbreviated form.</h3>
+    Enter Full Name:
+    <input type="text" id="fullName">
+    <button onclick="abbrConvert()">Convert</button>
+    <p>Abbreviated Name: <span id="abbr"></span></p>
+    <hr>
+
+    <h3>4. Calculate simple interest.</h3>
+    <input type="number" id="amount" placeholder="Principal amount"> <br><br>
+    <input type="number" id="rate" placeholder="Rate of Interest"> <br><br>
+    <input type="number" id="time" placeholder="Time (in years)"> <br><br>
+    <button onclick="simpleInterest()">Calculate</button>
+    <hr>
+
+    <h3>5. Gross salary program.</h3>
+    Enter your Salary:
+    <input type="number" id="salary"> <br><br>
+    Enter your allowances:
+    <input type="number" id="allowances"> <br><br>
+    <button onclick="calGrossSalary()">Calculate</button>
+    <p>Gross Salary: <span id="grossSalary"></span></p>
+    <hr>
+
+    <h3>6. Program to find the percentage of marks in 5 subjects.</h3>
+    Enter Marks for Subject 1:
+    <input type="number" id="sub1"><br><br>
+    Enter Marks for Subject 2:
+    <input type="number" id="sub2"><br><br>
+    Enter Marks for Subject 3:
+    <input type="number" id="sub3"><br><br>
+    Enter Marks for Subject 4:
+    <input type="number" id="sub4"><br><br>
+    Enter Marks for Subject 5:
+    <input type="number" id="sub5"><br><br>
+    <button onclick="calPercentage()">Calculate</button>
+    <p>Percentage: <span id="percentage"> ____</span> %</p>
+    <hr>
+
+    <h3>7. Convert temperature from Celsius to Fahrenheit.</h3>
+    Enter the Temperature in Celsius:
+    <input type="number" id="celsius">
+    <button onclick="toFarhen()">Calculate</button>
+    <hr>
+
+    <h3>8. Write a program to display the sizes of different data types.</h3>
+    <button onclick="displaySizes()">Display Sizes</button>
+    <p id="sizes"></p>
+    <hr>
+
+    <h3>9. Check whether a number is positive or negative.</h3>
+    Enter a number:
+    <input type="number" id="chknum">
+    <button onclick="calCheckNum()">Check</button>
+    <p>The number is: <span id="result"></span></p>
+    <hr>
+
+    <h3>10. Determine if a character is a vowel or not.</h3>
+    <input type="text" id="char" placeholder="Enter a letter (A-Z)...">
+    <button onclick="checkVowel()">Check Vowel</button>
+    <p id="p3"></p>
+    <hr>
+
+    <h3>11. Calculate the factorial of a given number.</h3>
+    Enter a number:
+    <input type="number" id="factnum">
+    <button onclick="calFactiorial()">Calculate</button>
+    <p>Factorial of the number: <span id="factorial"></span></p>
+    <hr>
+
+    <h3>12. Program to read an integer and print its first three powers (N^1, N^2, N^3).</h3>
+    Enter a number:
+    <input type="number" id="pownum">
+    <button onclick="calPow()">Calculate</button>
+    <p id="powers"></p>
+    <hr>
+
+    <h3>13. Program to check if a character is uppercase, lowercase, digit, or special character.</h3>
+
+    <hr>
+
+    <h3>14</h3>
+    <input type="number" name="" id="14a"><input type="number" id="14b"><input type="number" id="14c">
+    <button onclick="greatest()">Greatest?</button>
+    <hr>
+    <h3>15</h3>
+    <input type="number" name="" id="inpt" placeholder="Your age">
+    <button onclick="checkEligity()">Check Eligibility</button>
+    <hr>
+    <h3>16</h3>
+    <input type="number" name="" id="16a"><input type="number" id="16b">
+    <button onclick="greater()">Greater?</button>
+    <hr>
+    <h3>17</h3>
+    <input type="number" name="" id="17">
+    <button onclick="evenOdd()">Even / Odd</button>
+    <hr>
+    <h3>19</h3>
+    <input type="text" name="" id="19">
+    <button onclick="isVowel()">AeIoU ?</button>
+    <hr>
+    <h3>20</h3>
+    <input type="date" name="" id="20">
+    <button onclick="checkDate()">Check date</button>
+    <hr>
+    <h3>21</h3>
+    <input type="number" name="" id="21a"><input type="number" id="21b"><input type="number" id="21c">
+    <button onclick="largest()">Largest?</button>
+    <hr>
+    <h3>22</h3>
+    <input type="number" name="" id="22">
+    <button onclick="toFarhen()">To Farhenheit</button>
+    <button onclick="toCelsi()">To Celsius</button>
+    <hr>
+    <h3>23</h3>
+    <input type="number" name="" id="23">
+    <button onclick="weekDay()">Get Day</button>
+    <hr>
+    <!-- <h3>Syllable</h3>
+    <input type="text" name="" id="syll" placeholder="Enter character">
+    <button onclick="checkSyll()">Check Syllable</button>
+    <p id="ans"></p> -->
+    <!-- <hr> -->
+    <h3>24. Write a program to create a simple calculator using switch case.</h3>
+    Enter number 1:
+    <input type="number" id="num1"><br><br>
+    Enter number 2:
+    <input type="number" id="num2"><br><br>
+    Select Operator:
+    <select id="operator">
+        <option value="+">Addition</option>
+        <option value="-">Subtraction</option>
+        <option value="*">Multiplication</option>
+        <option value="/">Division</option>
+      </select><br><br>
+      <button onclick="calcSwitch()">Calculate</button><br>
+      <p id="calcresult"></p>
+    <hr>
+    <!-- <h3>24</h3>
+    <input type="text" name="" id="24">
+    <button onclick="calc()" id="calcButt">Calculate</button>
+    <hr> -->
+    <h3>26</h3>
+    <input type="text" name="" id="26">
+    <button onclick="remVowels()">Remove Vowels</button>
+
+    <script src="conditionals.js"></script>
+</body>
+</html>
