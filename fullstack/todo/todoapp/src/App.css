@@ -1,0 +1,78 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  min-width: 900px;
+  min-height: 90vh;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	width: 100%;
+	max-width: 400px;
+	background-color: white;
+	padding: 32px;
+	border-radius: 16px;
+	box-shadow: 0px 5px 49px #00000070;
+}
+.todo .checkbox {
+	width: 20px;
+	height: 20px;
+	margin-right: 16px;
+	border-radius: 50%;
+	background-color: var(--dark-alt);
+	background-image: linear-gradient(to bottom, transparent, transparent);
+	transition: 0.4s;
+}
+.todo{
+  border: 1px solid blue;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo.is-complete .checkbox {
+	background-color: rgb(21, 255, 0);
+	/* background-image: linear-gradient(to bottom, blue, red); */
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}

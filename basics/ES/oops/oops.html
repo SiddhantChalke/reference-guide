@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +10,17 @@
 
     <script>
         // basic class creation
+        // first class 
+        class Animal{
+            constructor(name, age){
+                this.name = name;
+                this.age = age;
+            }
+            getInfo(){
+                return (`The animal ${this.name} is ${this.age} yrs old.`)
+            }
+        }
+
         class Person {
             firstName;
             lastName;
@@ -25,18 +35,23 @@
             }
             // setters
             set email(newmail){
-                if(newmail.includes('@')) this.email=newmail
+                if(newmail.includes('@')) this.email = newmail
                 else return 'Invalid email'
             }
             // static method = callable only on class not its instances
             static count(){
-                if(!this.count) this.count=1;
-                else this.count++;
+                if(!this.count) this.count = 1;
+                else this.count ++;
                 return this.count;
             }
 
         }
-        // inheritance
+        // First instance = using new keyword
+        const firstAnimal = new Animal('Tiger', 6);
+        console.log(firstAnimal.getInfo());
+
+
+        // Inheritance
         class Student extends Person {
             grade;
             major;
@@ -44,6 +59,7 @@
                 return ` I'm ${this.firstName} from ${this.major} with ${this.grade} grade`
             }
         }
+
 
         // Polymorphism
         class Shape{
@@ -77,7 +93,8 @@
                 return 4*side;
             }
         }
-        // Encapsulation
+
+        // Encapsulation = restriction mechanism
         class BankAccount{
             accountNumber; balance;
             deposit(amount){
@@ -87,6 +104,7 @@
                 return this.balance -= this.amount;
             }
         }
+
         // Aggregation
         class Book{
             title;
@@ -100,19 +118,22 @@
                return this.books.find(book=>book.title.toLowerCase() === keyword.toLowerCase());
             }
         }
+        // create library
         const L1= new Library();
+        // create books
         const B1 = new Book(); B1.title = 'Oedipus Rex';
         const B2 = new Book(); B2.title = 'Tokyo Zodiac Murders';
         const B3 = new Book(); B3.title = 'Death on the Nile';
         const B4 = new Book(); B4.title = 'Sputnik Sweetheart';
         const B5 = new Book(); B5.title = 'Norwegian Wood';
+        // add books to library
         L1.addBook(B1); 
         L1.addBook(B2);
         L1.addBook(B3);
         L1.addBook(B4);
         L1.addBook(B5);
-        console.log(L1.books);
-        console.log( L1.findBook('Oedipus Rex').title );
+        // console.log(L1.books);
+        // console.log( L1.findBook('Oedipus Rex').title );
     </script>
 </body>
 
