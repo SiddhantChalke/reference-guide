@@ -21,6 +21,14 @@ import AllProducts from './pages/Admin/AllProducts.jsx'
 import Home from './pages/Home.jsx'
 import Favorites from './pages/Products/Favorites.jsx'
 import ProductDetails from './pages/Products/ProductDetails.jsx'
+import Cart from './pages/Cart.jsx'
+import Shop from './pages/Shop.jsx'
+import Shipping from './pages/Orders/Shipping.jsx'
+import PlaceOrder from './pages/Orders/PlaceOrder.jsx'
+import Order from './pages/Orders/Order.jsx'
+import UserOrder from './pages/User/UserOrder.jsx'
+import OrderList from './pages/Admin/OrderList.jsx'
+import AdminDashboard from './pages/Admin/AdminDashboard.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +39,12 @@ const router = createBrowserRouter(
       <Route index={true} path='/' element={<Home />} />
       <Route path='/favorites' element={<Favorites />} />
       <Route path='/product/:id' element={<ProductDetails />} />
+      <Route path='/cart' element={<Cart />} />
+      <Route path='/shop' element={<Shop />} />
+      <Route path='/shipping' element={<Shipping />} />
+      <Route path='/placeorder' element={<PlaceOrder />} />
+      <Route path='/order/:id' element={<Order />} />
+      <Route path='/user-orders' element={<UserOrder />} />
 
       {/* Registered routes */}
       <Route path='' element={<PrivateRoute />} >
@@ -45,6 +59,8 @@ const router = createBrowserRouter(
         <Route path='productlist/:pageNo' element={<ProductList />} />
         <Route path='allproducts' element={<AllProducts />} />
         <Route path='updateproduct/:id' element={<ProductUpdate />} />
+        <Route path='all-orders' element={<OrderList />} />
+        <Route path='dashboard' element={<AdminDashboard />} />
       </Route>
 
     </Route>
@@ -56,7 +72,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     {/* <App /> */}
     <Provider store={store}>
-      <RouterProvider router={router} />
+      {/* <PaypalScriptProvider> */}
+        <RouterProvider router={router} />
+      {/* </PaypalScriptProvider> */}
     </Provider>
   </React.StrictMode>,
 )

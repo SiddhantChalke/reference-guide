@@ -2,7 +2,7 @@ import express from 'express'
 import formidable from 'express-formidable'
 import { authenticate, authorizeAdmin } from '../middlewares/authMiddleware.js';
 import checkId from '../middlewares/checkId.js';
-import {addProduct, updateProduct, removeProduct, fetchProductById, fetchAllProducts, addProductReview, fetchNewProducts, fetchTopProducts} from '../controllers/productController.js';
+import {addProduct, updateProduct, removeProduct, fetchProductById, fetchAllProducts, addProductReview, fetchNewProducts, fetchTopProducts, filterProducts} from '../controllers/productController.js';
 
 const router = express.Router()
 // create product
@@ -18,6 +18,8 @@ router
 .get(fetchProductById)
 .patch(authenticate, authorizeAdmin, formidable(), updateProduct)
 .delete(authenticate, authorizeAdmin, formidable(), removeProduct)
+// filtered-products
+router.route('/filtered-products').post(filterProducts)
 
 // review routes
 router.route("/:id/reviews").post(authenticate, checkId, addProductReview);

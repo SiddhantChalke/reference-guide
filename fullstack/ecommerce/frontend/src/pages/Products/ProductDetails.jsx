@@ -17,9 +17,10 @@ import {
 } from "react-icons/fa";
 import moment from "moment";
 import HeartIcon from "./HeartIcon";
-// import Ratings from "./Ratings";
-// import ProductTabs from "./ProductTabs";
-// import { addToCart } from "../../redux/features/cart/cartSlice";
+import Ratings from "./Ratings";
+import ProductTabs from "./ProductTabs";
+import { addToCart } from "../../redux/features/cart/cartSlice";
+import shoeImg from '../../../../uploads/domino.jpg'
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -85,10 +86,14 @@ const ProductDetails = () => {
           <div className="flex flex-wrap relative items-between mt-[2rem] ml-[10rem]">
             <div>
               <img
+                src={shoeImg}
+                className="w-full xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] mr-[2rem]"
+              />
+              {/* <img
                 src={product.image}
                 alt={product.name}
                 className="w-full xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] mr-[2rem]"
-              />
+              /> */}
 
               <HeartIcon product={product} />
             </div>
@@ -133,10 +138,10 @@ const ProductDetails = () => {
               </div>
 
               <div className="flex justify-between flex-wrap">
-                {/* <Ratings
+                <Ratings
                   value={product.rating}
                   text={`${product.numReviews} reviews`}
-                /> */}
+                />
 
                 {product.countInStock > 0 && (
                   <div>
@@ -166,7 +171,7 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            {/* <div className="mt-[5rem] container flex flex-wrap items-start justify-between ml-[10rem]">
+            <div className="mt-[5rem] container flex flex-wrap items-start justify-between ml-[10rem]">
               <ProductTabs
                 loadingProductReview={loadingProductReview}
                 userInfo={userInfo}
@@ -177,7 +182,7 @@ const ProductDetails = () => {
                 setComment={setComment}
                 product={product}
               />
-            </div> */}
+            </div>
           </div>
         </>
       )}

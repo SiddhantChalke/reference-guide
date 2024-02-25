@@ -230,21 +230,29 @@ const fetchNewProducts = asyncHandler(async (req, res) => {
   }
 });
 
-// const filterProducts = asyncHandler(async (req, res) => {
-//   try {
-//     const { checked, radio } = req.body;
+const filterProducts = asyncHandler(async (req, res) => {
+  try {
+    // Extract 'checked' and 'radio' from the request body
+    const { checked, radio } = req.body;
 
-//     let args = {};
-//     if (checked.length > 0) args.category = checked;
-//     if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    // to store filtering arguments for the MongoDB query
+    let args = {};
 
-//     const products = await Product.find(args);
-//     res.json(products);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Server Error" });
-//   }
-// });
+    // If there are selected categories (checked array is not empty), add 'category' to the filter arguments
+    if (checked.length > 0) args.category = checked;
+
+    // If there is a selected price range (radio array is not empty), add 'price' to the filter arguments
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+
+    // Use the filtering arguments to query the 'Product' collection in the database
+    const products = await Product.find(args);
+    
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 
 export {
@@ -257,5 +265,5 @@ export {
   addProductReview,
   fetchTopProducts,
   fetchNewProducts,
-//   filterProducts,
+  filterProducts,
 };

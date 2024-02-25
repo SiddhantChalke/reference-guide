@@ -11,6 +11,7 @@ import './Navigation.css'
 const Navigation = () => {
   const { userInfo } = useSelector(state => state.auth)
   const favorites = useSelector((state) => state.favorites);
+  const {cartItems} = useSelector((state) => state.cart);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSideBar, setShowSidebar] = useState(false);
@@ -65,9 +66,16 @@ const Navigation = () => {
       <div className="flex flex-col justify-center space-y-4">
         <Link to='/cart' className='flex items-center transition-transform transform hover:translate-x-2'>
           <AiOutlineShoppingCart className='mr-2 mt-[3rem' size={26} />
-          <span className="hidden nav-item-name mt-[3rem">
+          <div className="absolute top-4">
+            {cartItems.length > 0 && (
+                <span className="px-1 py-0 text-sm text-white bg-red-500 rounded-full">
+                  {cartItems.reduce((a, c) => a + c.qty, 0)}
+                </span>
+            )}
+            <span className="hidden nav-item-name mt-[3rem">
             Cart
           </span>
+          </div>
         </Link>
       </div>
       <div className="flex flex-col justify-center space-y-4">
