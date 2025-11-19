@@ -10,7 +10,7 @@
 
         var arr = [12,23,34,5,3,6,57,0];
         function myProm(){
-                                        // callbacks as args
+            // callbacks as args
             let promise1 = new Promise((res,rej)=>{
                 if(arr.length>0){
                     res(arr);
@@ -46,6 +46,7 @@
         }).catch(err=> {
             console.error(err)
         });
+
         // 
         async function weatherAPI(){
             const url = 'https://open-weather13.p.rapidapi.com/city/pune';
@@ -72,7 +73,7 @@
                 console.error(error);
             }
         }
-        weatherAPI();
+        // weatherAPI();
 
 
     </script>

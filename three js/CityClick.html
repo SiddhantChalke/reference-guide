@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Globe Messenger Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #0a0a2a, #1a1a3a);
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        
+        #container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+        }
+        
+        h1 {
+            margin-top: 0;
+            color: #4fc3f7;
+        }
+        
+        button {
+            background: #4fc3f7;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background: #29b6f6;
+        }
+        
+        #score {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        #instructions {
+            font-size: 14px;
+            margin-top: 15px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    
+    <div id="ui">
+        <h1>Globe Messenger</h1>
+        <div id="score">Messages Delivered: <span id="scoreValue">0</span></div>
+        <button id="startBtn">Start Game</button>
+        <button id="resetBtn">Reset</button>
+        
+        <div id="instructions">
+            <p>Click on glowing cities to deliver messages!</p>
+            <p>Drag to rotate the globe, scroll to zoom.</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Main variables
+        let scene, camera, renderer, globe, raycaster, mouse;
+        let score = 0;
+        let gameStarted = false;
+        let cities = [];
+        let activeCities = [];
+        
+        // Initialize the application
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
+            
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // Create renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.getElementById('container').appendChild(renderer.domElement);
+            
+            // Add lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 3, 5);
+            scene.add(directionalLight);
+            
+            // Create the globe
+            createGlobe();
+            
+            // Add stars in the background
+            createStars();
+            
+            // Set up raycaster for mouse interactions
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+            
+            // Event listeners
+            window.addEventListener('resize', onWindowResize);
+            document.addEventListener('mousedown', onMouseDown);
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('wheel', onMouseWheel);
+            
+            // UI event listeners
+            document.getElementById('startBtn').addEventListener('click', startGame);
+            document.getElementById('resetBtn').addEventListener('click', resetGame);
+            
+            // Start animation loop
+            animate();
+        }
+        
+        function createGlobe() {
+            // Create Earth sphere
+            const geometry = new THREE.SphereGeometry(2, 64, 64);
+            
+            // Load Earth texture
+            const textureLoader = new THREE.TextureLoader();
+            const earthTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_atmos_2048.jpg');
+            const earthBumpMap = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_normal_2048.jpg');
+            const earthSpecularMap = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_specular_2048.jpg');
+            
+            const material = new THREE.MeshPhongMaterial({
+                map: earthTexture,
+                bumpMap: earthBumpMap,
+                bumpScale: 0.05,
+                specularMap: earthSpecularMap,
+                specular: new THREE.Color(0x333333),
+                shininess: 5
+            });
+            
+            globe = new THREE.Mesh(geometry, material);
+            scene.add(globe);
+            
+            // Add clouds
+            const cloudGeometry = new THREE.SphereGeometry(2.05, 64, 64);
+            const cloudMaterial = new THREE.MeshPhongMaterial({
+                map: textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/earth_clouds_1024.png'),
+                transparent: true,
+                opacity: 0.4
+            });
+            
+            const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+            scene.add(clouds);
+            
+            // Create cities
+            createCities();
+        }
+        
+        function createCities() {
+            // Define major world cities with their coordinates
+            const cityData = [
+                { name: "New York", lat: 40.7128, lng: -74.0060 },
+                { name: "London", lat: 51.5074, lng: -0.1278 },
+                { name: "Tokyo", lat: 35.6762, lng: 139.6503 },
+                { name: "Sydney", lat: -33.8688, lng: 151.2093 },
+                { name: "Cairo", lat: 30.0444, lng: 31.2357 },
+                { name: "Rio de Janeiro", lat: -22.9068, lng: -43.1729 },
+                { name: "Moscow", lat: 55.7558, lng: 37.6173 },
+                { name: "Beijing", lat: 39.9042, lng: 116.4074 }
+            ];
+            
+            // Convert lat/lng to 3D coordinates on the sphere
+            cityData.forEach(city => {
+                const phi = (90 - city.lat) * (Math.PI / 180);
+                const theta = (city.lng + 180) * (Math.PI / 180);
+                
+                const x = -(2 * Math.sin(phi) * Math.cos(theta));
+                const z = (2 * Math.sin(phi) * Math.sin(theta));
+                const y = (2 * Math.cos(phi));
+                
+                // Create a small sphere for the city
+                const cityGeometry = new THREE.SphereGeometry(0.03, 16, 16);
+                const cityMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+                const cityMarker = new THREE.Mesh(cityGeometry, cityMaterial);
+                
+                cityMarker.position.set(x, y, z);
+                cityMarker.userData = { 
+                    name: city.name, 
+                    lat: city.lat, 
+                    lng: city.lng,
+                    active: false
+                };
+                
+                globe.add(cityMarker);
+                cities.push(cityMarker);
+            });
+        }
+        
+        function createStars() {
+            const starGeometry = new THREE.BufferGeometry();
+            const starMaterial = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 0.05,
+            });
+            
+            const starVertices = [];
+            for (let i = 0; i < 10000; i++) {
+                const x = (Math.random() - 0.5) * 2000;
+                const y = (Math.random() - 0.5) * 2000;
+                const z = (Math.random() - 0.5) * 2000;
+                starVertices.push(x, y, z);
+            }
+            
+            starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+            const stars = new THREE.Points(starGeometry, starMaterial);
+            scene.add(stars);
+        }
+        
+        function startGame() {
+            gameStarted = true;
+            document.getElementById('startBtn').disabled = true;
+            activateRandomCity();
+        }
+        
+        function resetGame() {
+            score = 0;
+            document.getElementById('scoreValue').textContent = score;
+            gameStarted = false;
+            document.getElementById('startBtn').disabled = false;
+            
+            // Reset all cities
+            cities.forEach(city => {
+                city.material.color.set(0xff0000);
+                city.userData.active = false;
+            });
+            
+            activeCities = [];
+        }
+        
+        function activateRandomCity() {
+            if (!gameStarted) return;
+            
+            // Deactivate previous active cities
+            activeCities.forEach(cityIndex => {
+                cities[cityIndex].material.color.set(0xff0000);
+                cities[cityIndex].userData.active = false;
+            });
+            
+            activeCities = [];
+            
+            // Activate 1-3 random cities
+            const numActive = Math.floor(Math.random() * 3) + 1;
+            for (let i = 0; i < numActive; i++) {
+                const randomIndex = Math.floor(Math.random() * cities.length);
+                cities[randomIndex].material.color.set(0x00ff00);
+                cities[randomIndex].userData.active = true;
+                activeCities.push(randomIndex);
+            }
+            
+            // Schedule next activation
+            setTimeout(activateRandomCity, 3000);
+        }
+        
+        function onMouseDown(event) {
+            if (!gameStarted) return;
+            
+            // Calculate mouse position in normalized device coordinates
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            
+            // Update the raycaster
+            raycaster.setFromCamera(mouse, camera);
+            
+            // Calculate objects intersecting the picking ray
+            const intersects = raycaster.intersectObjects(cities);
+            
+            if (intersects.length > 0) {
+                const city = intersects[0].object;
+                
+                if (city.userData.active) {
+                    // City was clicked and is active - deliver message!
+                    score++;
+                    document.getElementById('scoreValue').textContent = score;
+                    
+                    // Visual feedback
+                    city.material.color.set(0xffff00);
+                    city.userData.active = false;
+                    
+                    // Remove from active cities
+                    const index = activeCities.findIndex(i => cities[i] === city);
+                    if (index !== -1) {
+                        activeCities.splice(index, 1);
+                    }
+                    
+                    // Create particle effect
+                    createParticles(city.position);
+                }
+            }
+        }
+        
+        function createParticles(position) {
+            const particleCount = 20;
+            const particles = new THREE.Group();
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particleGeometry = new THREE.SphereGeometry(0.02, 8, 8);
+                const particleMaterial = new THREE.MeshBasicMaterial({ 
+                    color: 0xffff00 
+                });
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                
+                // Set initial position
+                particle.position.copy(position);
+                
+                // Random velocity
+                const velocity = new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.1,
+                    (Math.random() - 0.5) * 0.1,
+                    (Math.random() - 0.5) * 0.1
+                );
+                
+                particle.userData = { velocity };
+                particles.add(particle);
+            }
+            
+            scene.add(particles);
+            
+            // Animate particles
+            function animateParticles() {
+                let allDone = true;
+                
+                particles.children.forEach(particle => {
+                    particle.position.add(particle.userData.velocity);
+                    particle.userData.velocity.multiplyScalar(0.95); // Slow down
+                    particle.material.opacity -= 0.02;
+                    
+                    if (particle.material.opacity > 0) {
+                        allDone = false;
+                    }
+                });
+                
+                if (!allDone) {
+                    requestAnimationFrame(animateParticles);
+                } else {
+                    scene.remove(particles);
+                }
+            }
+            
+            animateParticles();
+        }
+        
+        // Mouse interaction variables
+        let isMouseDown = false;
+        let previousMousePosition = {
+            x: 0,
+            y: 0
+        };
+        
+        function onMouseMove(event) {
+            if (isMouseDown) {
+                const deltaMove = {
+                    x: event.clientX - previousMousePosition.x,
+                    y: event.clientY - previousMousePosition.y
+                };
+                
+                // Rotate the globe based on mouse movement
+                globe.rotation.y += deltaMove.x * 0.01;
+                globe.rotation.x += deltaMove.y * 0.01;
+                
+                // Limit vertical rotation
+                globe.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, globe.rotation.x));
+            }
+            
+            previousMousePosition = {
+                x: event.clientX,
+                y: event.clientY
+            };
+        }
+        
+        function onMouseWheel(event) {
+            // Zoom in/out with mouse wheel
+            camera.position.z += event.deltaY * 0.01;
+            camera.position.z = Math.max(3, Math.min(10, camera.position.z));
+        }
+        
+        document.addEventListener('mousedown', () => {
+            isMouseDown = true;
+        });
+        
+        document.addEventListener('mouseup', () => {
+            isMouseDown = false;
+        });
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate the globe slowly
+            if (!isMouseDown) {
+                globe.rotation.y += 0.001;
+            }
+            
+            // Rotate clouds slightly faster for parallax effect
+            if (globe.children.length > 0) {
+                globe.children[0].rotation.y += 0.0005;
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Initialize the application
+        init();
+    </script>
+</body>
+</html>
